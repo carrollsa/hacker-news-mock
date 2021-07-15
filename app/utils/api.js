@@ -35,7 +35,7 @@ export function fetchMainPosts (type) {
         throw new Error(`There was an error fetching the ${type} posts.`)
       }
 
-      return ids.slice(0, 50)
+      return ids
     })
     .then((ids) => Promise.all(ids.map(fetchItem)))
     .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
@@ -48,5 +48,19 @@ export function fetchUser (id) {
 
 export function fetchPosts (ids) {
   return Promise.all(ids.map(fetchItem))
+    .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+}
+
+export function fetchStories (type) {
+  return fetch(`${api}/${type}stories${json}`)
+    .then((data) => data.json())
+    .then((items) => {
+      if(!items) {
+        throw new Error("Error fetching top stories")
+      }
+
+      return items
+    })
+    .then((items) => Promise.all(items.map(fetchItem)))
     .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
 }

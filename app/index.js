@@ -1,12 +1,13 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import './index.css'
+import PostsList from './components/PostsList'
 
 class App extends React.Component {
     render() {
         return (
-            <div>
-                Hello World!
+            <div className='container'>
+                <PostsList />
             </div>
         )
     }
