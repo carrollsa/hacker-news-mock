@@ -27,19 +27,19 @@ export function fetchComments (ids) {
     .then((comments) => removeDeleted(onlyComments(removeDead(comments))))
 }
 
-export function fetchMainPosts (type) {
-  return fetch(`${api}/${type}stories${json}`)
-    .then((res) => res.json())
-    .then((ids) => {
-      if (!ids) {
-        throw new Error(`There was an error fetching the ${type} posts.`)
-      }
+// export function fetchMainPosts (type) {
+//   return fetch(`${api}/${type}stories${json}`)
+//     .then((res) => res.json())
+//     .then((ids) => {
+//       if (!ids) {
+//         throw new Error(`There was an error fetching the ${type} posts.`)
+//       }
 
-      return ids
-    })
-    .then((ids) => Promise.all(ids.map(fetchItem)))
-    .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
-}
+//       return ids
+//     })
+//     .then((ids) => Promise.all(ids.map(fetchItem)))
+//     .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+// }
 
 export function fetchUser (id) {
   return fetch(`${api}/user/${id}${json}`)
@@ -51,7 +51,7 @@ export function fetchPosts (ids) {
     .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
 }
 
-export function fetchStories (type) {
+export function fetchMainPosts (type) {
   return fetch(`${api}/${type}stories${json}`)
     .then((data) => data.json())
     .then((items) => {
